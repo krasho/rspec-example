@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Post pages" do 
+describe "Post pages", :type => :feature do 
 	describe "Home page" do 
 		context "listing all posts" do 
 			context "Listing all posts" do
@@ -10,7 +10,21 @@ describe "Post pages" do
 
 			  it "should list all available post titles" do 
 			  	visit root_path
+                posts = Post.all
+                post.each do |post|
+                	page.should have_content post.tile
+                end
+  
 			  end
-		end
-	end
+
+              it "should list all available posts contents" do
+			     visit root_path
+			     posts = Post.all
+			     posts.each do |post|
+			        page.should have_content post.content
+			     end
+			  end
+
+            end
+		end	end
 end
