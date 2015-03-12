@@ -11,8 +11,9 @@ describe "Post pages", :type => :feature do
 			  it "should list all available post titles" do 
 			  	visit root_path
                 posts = Post.all
-                post.each do |post|
-                	page.should have_content post.tile
+                posts.each do |post|
+                	#page.should have_content post.title
+                	expect(page).to have_content post.title
                 end
   
 			  end
@@ -21,7 +22,8 @@ describe "Post pages", :type => :feature do
 			     visit root_path
 			     posts = Post.all
 			     posts.each do |post|
-			        page.should have_content post.content
+			        #page.should have_content post.content
+			        expect(page).to have_content post.content
 			     end
 			  end
 
