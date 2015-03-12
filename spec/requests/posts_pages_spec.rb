@@ -7,26 +7,36 @@ describe "Post pages", :type => :feature do
 			  let!(:post1) { Post.create!(:title => "Post 1", :content => "Post number one") }
 			  let!(:post2) { Post.create!(:title => "Post 2", :content => "Hi there") }
 			  let!(:post3) { Post.create!(:title => "Post 3", :content => "RSpec rocks") }
+			  let(:posts)  { Post.all }
 
-			  it "should list all available post titles" do 
-			  	visit root_path
-                posts = Post.all
-                posts.each do |post|
+              before do
+              	visit root_path
+              end 
+               
+
+			  #it "should list all available post titles" do 
+              #  posts.each do |post|
                 	#page.should have_content post.title
-                	expect(page).to have_content post.title
-                end
+              #  	expect(page).to have_content post.title
+              #  end
   
-			  end
+			  #end
 
-              it "should list all available posts contents" do
-			     visit root_path
-			     posts = Post.all
-			     posts.each do |post|
+              #it "should list all available posts contents" do
+			  #   posts.each do |post|
 			        #page.should have_content post.content
-			        expect(page).to have_content post.content
-			     end
+			  #      expect(page).to have_content post.content
+			  #   end
+			  #end
+
+			  it "should list all available posts contents" do 
+			  	posts.each do |post|
+			  		expect(page).to have_selector ".post_title", :text=>post.title
+			  		expect(page).to have_selector ".post_content", :text=>post.content
+			  	end
 			  end
 
             end
-		end	end
+		end	
+	end
 end
